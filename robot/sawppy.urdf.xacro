@@ -11,6 +11,12 @@
     <xacro:property name="chassis_width" value="0.270"/>
     <xacro:property name="corner_height" value="0.080"/>
 
+    <!-- Distance between horizontal hole and upper and lower profile's central
+    axes. Distance between the central hole and both axes are different -->
+    <xacro:property name="suspension_mount_upper_dist" value="0.035"/>
+    <xacro:property name="suspension_mount_lower_dist" value="0.045"/>
+    <xacro:property name="suspension_mount_offset_x" value="0.073"/>
+
     <!-- INCLUDES -->
     <xacro:include filename="$(find sawppy_description)/urdf/common_properties.xacro"/>
     <xacro:include filename="$(find sawppy_description)/urdf/body.urdf.xacro"/>

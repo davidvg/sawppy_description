@@ -4,6 +4,7 @@
 
     <xacro:include filename="$(find sawppy_description)/urdf/profile.urdf.xacro"/>
     <xacro:include filename="$(find sawppy_description)/urdf/body_corner.urdf.xacro"/>
+    <xacro:include filename="$(find sawppy_description)/urdf/suspension_mount.urdf.xacro"/>
 
     <xacro:macro name="body">
 
@@ -88,6 +89,17 @@
         <origin xyz="-${chassis_lenght/2} ${chassis_width/2} ${bottom_plate_height + corner_height/2 + profile_width/2}" rpy="0.0 0.0 -${PI/2}"/>
     </xacro:body_corner>
     
+    <!-- SUSPENSION MOUNTS -->
+
+    <!-- SUSPENSION MOUNT - RIGHT -->
+    <xacro:suspension_mount suffix="r" parent="base_link">
+        <origin xyz="${suspension_mount_offset_x} -${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:suspension_mount>
+
+    <!-- SUSPENSION MOUNT - LEFT -->
+    <xacro:suspension_mount suffix="l" parent="base_link">
+        <origin xyz="${suspension_mount_offset_x} ${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:suspension_mount>
 
 
 </robot>
