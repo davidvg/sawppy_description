@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:macro name="body_corner" params="suffix parent *origin">
+
+        <joint name="${parent}_to_${suffix}_corner" type="fixed">
+            <parent link="${parent}"/>
+            <child link="corner_${suffix}"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="corner_${suffix}">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/body_corner.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+    </xacro:macro>
+
+</robot>

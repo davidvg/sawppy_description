@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<robot name="xacro_properties" xmlns:xacro="http://ros.org/wiki.xacro">
+
+    <!-- CONSTANTS -->
+    <xacro:property name="PI" value="3.141592654"/>
+    <xacro:property name="SCALE" value="0.001 0.001 0.001"/>
+
+    <!-- PARAMETERS -->
+
+    <!-- COLORS -->
+    <material name="glass">
+        <color rgba="0.7 0.7 0.7 0.5"/>
+    </material>
+
+    <material name="aluminium">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+    </material>
+
+    <material name="plastic">
+        <color rgba="0.95 0.95 0.95 1.0"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
+</robot>

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find sawppy_description)/urdf/profile.urdf.xacro"/>
+    <xacro:include filename="$(find sawppy_description)/urdf/body_corner.urdf.xacro"/>
+
+    <xacro:macro name="body">
+
+        
+        <!-- ELEMENTS -->
+        <link name="base_link">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/bottom_plate.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="glass"/>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 ${bottom_plate_height/2}" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <box size="${chassis_lenght} ${chassis_width} ${bottom_plate_height}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <!-- PROFILE - FRONT BOTTOM -->
+    <xacro:profile suffix="fb" parent="base_link" length="245">
+        <origin xyz="${chassis_lenght/2} 0.0 ${bottom_plate_height + profile_width/2}" rpy="0.0 0.0 ${PI/2}"/>
+    </xacro:profile>
+
+    <!-- PROFILE - BACK BOTTOM -->
+    <xacro:profile suffix="bb" parent="base_link" length="245">
+        <origin xyz="-${chassis_lenght/2} 0.0 ${bottom_plate_height + profile_width/2}" rpy="0.0 0.0 ${PI/2}"/>
+    </xacro:profile>
+
+    <!-- PROFILE - RIGHT BOTTOM -->
+    <xacro:profile suffix="rb" parent="base_link" length="385">
+        <origin xyz="0.0 -${chassis_width/2} ${bottom_plate_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:profile>
+
+    <!-- PROFILE - LEFT BOTTOM -->
+    <xacro:profile suffix="lb" parent="base_link" length="385">
+        <origin xyz="0.0 ${chassis_width/2} ${bottom_plate_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:profile>
+
+    <!-- PROFILE - FRONT TOP -->
+    <xacro:profile suffix="ft" parent="base_link" length="245">
+        <origin xyz="${chassis_lenght/2} 0.0 ${corner_height + bottom_plate_height + profile_width/2}" rpy="0.0 0.0 ${PI/2}"/>
+    </xacro:profile>
+
+    <!-- PROFILE - BACK TOP -->
+    <xacro:profile suffix="bt" parent="base_link" length="245">
+        <origin xyz="-${chassis_lenght/2} 0.0 ${corner_height + bottom_plate_height + profile_width/2}" rpy="0.0 0.0 ${PI/2}"/>
+    </xacro:profile>
+
+    <!-- PROFILE - RIGHT TOP -->
+    <xacro:profile suffix="rt" parent="base_link" length="385">
+        <origin xyz="0.0 -${chassis_width/2} ${corner_height + bottom_plate_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:profile>
+
+    <!-- PROFILE - LEFT TOP -->
+    <xacro:profile suffix="lt" parent="base_link" length="385">
+        <origin xyz="0.0 ${chassis_width/2} ${corner_height + bottom_plate_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:profile>
+
+    <!-- CHASSIS CORNERS -->
+
+    <!-- CORNER - FRONT RIGHT -->
+    <xacro:body_corner suffix="fr" parent="base_link">
+        <origin xyz="${chassis_lenght/2} -${chassis_width/2} ${bottom_plate_height + corner_height/2 + profile_width/2}" rpy="0.0 0.0 ${PI/2}"/>
+    </xacro:body_corner>
+    
+    <!-- CORNER - FRONT LEFT -->
+    <xacro:body_corner suffix="fl" parent="base_link">
+        <origin xyz="${chassis_lenght/2} ${chassis_width/2} ${bottom_plate_height + corner_height/2 + profile_width/2}" rpy="0.0 0.0 -${PI}"/>
+    </xacro:body_corner>
+    
+    <!-- CORNER - BACK RIGHT -->
+    <xacro:body_corner suffix="br" parent="base_link">
+        <origin xyz="-${chassis_lenght/2} -${chassis_width/2} ${bottom_plate_height + corner_height/2 + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:body_corner>
+    
+    <!-- CORNER - BACK LEFT -->
+    <xacro:body_corner suffix="bl" parent="base_link">
+        <origin xyz="-${chassis_lenght/2} ${chassis_width/2} ${bottom_plate_height + corner_height/2 + profile_width/2}" rpy="0.0 0.0 -${PI/2}"/>
+    </xacro:body_corner>
+    
+
+
+</robot>

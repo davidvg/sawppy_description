@@ -1,0 +1,20 @@
+<package>
+  <name>sawppy_description</name>
+  <version>0.1</version>
+
+  <description>This package contains the robot model for the Sawppy rover.</description>
+  <author email="davidvazquezgijon@gmail.com">David Vazquez Garcia</author>
+
+  <maintainer email="davidvazquezgijon@gmail.com">David Vazquez Garcia</maintainer>
+
+  <license>BSD</license>
+  <url>https://github.com/davidvg/sawppy_description</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>xacro</run_depend>
+
+</package>
