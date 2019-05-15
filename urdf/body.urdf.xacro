@@ -5,6 +5,8 @@
     <xacro:include filename="$(find sawppy_description)/urdf/profile.urdf.xacro"/>
     <xacro:include filename="$(find sawppy_description)/urdf/body_corner.urdf.xacro"/>
     <xacro:include filename="$(find sawppy_description)/urdf/suspension_mount.urdf.xacro"/>
+    <xacro:include filename="$(find sawppy_description)/urdf/battery_tray.urdf.xacro"/>
+    <xacro:include filename="$(find sawppy_description)/urdf/differential.urdf.xacro"/>
 
     <xacro:macro name="body">
 
@@ -100,6 +102,18 @@
     <xacro:suspension_mount suffix="l" parent="base_link">
         <origin xyz="${suspension_mount_offset_x} ${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:suspension_mount>
+
+    <!-- BATTERY TRAY -->
+    <xacro:battery_tray parent="base_link">
+        <origin xyz="-${chassis_lenght/2} 0.0 ${bottom_plate_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:battery_tray>
+
+    <!-- DIFFERENTIAL -->
+    <xacro:differential parent="base_link" offset_x="0.0">
+    </xacro:differential>
+
+
+
 
 
 </robot>

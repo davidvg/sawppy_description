@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki.xacro">
+
+    <xacro:macro name="battery_tray" params="parent *origin">
+
+        <!-- Right battery tray -->
+        <joint name="${parent}_to_batt_tray_r" type="fixed">
+            <parent link="${parent}"/>
+            <child link="battery_tray_r"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="battery_tray_r">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/battery_tray_right.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+
+        <!-- Left battery tray -->
+        <joint name="${parent}_to_batt_tray_l" type="fixed">
+            <parent link="${parent}"/>
+            <child link="battery_tray_l"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="battery_tray_l">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/battery_tray_left.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+
+    </xacro:macro>
+
+</robot>

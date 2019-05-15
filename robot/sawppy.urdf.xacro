@@ -9,7 +9,10 @@
 
     <xacro:property name="chassis_lenght" value="0.410"/>
     <xacro:property name="chassis_width" value="0.270"/>
-    <xacro:property name="corner_height" value="0.080"/>
+    <xacro:property name="corner_height" value="0.080"/> <!-- Remove -->
+    <xacro:property name="chassis_height" value="0.080"/>
+
+    <xacro:property name="differential_offset_x" value="0.00"/>
 
     <!-- Distance between horizontal hole and upper and lower profile's central
     axes. Distance between the central hole and both axes are different -->
