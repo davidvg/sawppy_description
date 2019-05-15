@@ -2,13 +2,31 @@
 
 <robot xmlns:xacro="http://ros.org/wiki.xacro">
 
-    <xacro:macro name="differential" params="parent offset_x">
+    <xacro:property name="rod_offset_z" value="0.0257"/>
 
-        <!-- Right differential mount -->
-        <joint name="${parent}_to_differential_mount_r" type="fixed">
+    <xacro:macro name="differential" params="parent *origin">
+
+        <!-- BASE REFERENCE FRAME FOR THE DIFFERENTIAL -->
+        <joint name="differential_mount" type="fixed">
             <parent link="${parent}"/>
+            <child link="differential_link"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="differential_link">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="0.0001 0.0001 0.0001"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <!-- RIGHT DIFFERENTIAL MOUNT -->
+        <joint name="differential_to_differential_mount_r" type="fixed">
+            <parent link="differential_link"/>
             <child link="differential_mount_r"/>
-            <origin xyz="${offset_x} -${chassis_width/2} ${bottom_plate_height + chassis_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 -${chassis_width/2} 0.0" rpy="0.0 0.0 0.0"/>
         </joint>
 
         <link name="differential_mount_r">
@@ -21,11 +39,11 @@
             </visual>
         </link>
 
-        <!-- Left differential mount-->
-        <joint name="${parent}_to_differential_mount_l" type="fixed">
-            <parent link="${parent}"/>
+        <!-- LEFT DIFFERENTIAL MOUNT -->
+        <joint name="differential_to_differential_mount_l" type="fixed">
+            <parent link="differential_link"/>
             <child link="differential_mount_l"/>
-            <origin xyz="${offset_x} ${chassis_width/2} ${bottom_plate_height + chassis_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 ${chassis_width/2} 0.0" rpy="0.0 0.0 0.0"/>
         </joint>
 
         <link name="differential_mount_l">
@@ -39,21 +57,97 @@
         </link>
 
         <!-- Differential profile -->
-        <joint name="${parent}_to_differential_mount_l" type="fixed">
-            <parent link="${parent}"/>
-            <child link="differential_mount_l"/>
-            <origin xyz="${offset_x} ${chassis_width/2} ${bottom_plate_height + chassis_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
+        <xacro:profile suffix="diff" parent="differential_link" length="245">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
+        </xacro:profile>
+
+        <!-- DIFFERENTIAL SUPPORT -->
+        <joint name="differential_to_support_lower" type="fixed">
+            <parent link="differential_link"/>
+            <child link="differential_support_lower"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         </joint>
 
-        <link name="differential_mount_l">
+        <link name="differential_support_lower">
             <visual>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
                 <geometry>
-                    <mesh filename="package://sawppy_description/meshes/stl/differential_mount_left.stl" scale="${SCALE}"/>
+                    <mesh filename="package://sawppy_description/meshes/stl/differential_support_lower.stl" scale="${SCALE}"/>
                 </geometry>
                 <material name="plastic"/>
             </visual>
         </link>
+
+        <joint name="differential_to_support_upper" type="fixed">
+            <parent link="differential_link"/>
+            <child link="differential_support_upper"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </joint>
+
+        <link name="differential_support_upper">
+            <visual>
+                <origin xyz="0.0 0.0 ${0.0254-profile_width/2}" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/differential_support_upper.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+
+        <!-- ROD SUPPORT -->
+        <joint name="differential_to_rod_support" type="fixed">
+            <parent link="differential_link"/>
+            <child link="differential_rod_support"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </joint>
+
+        <link name="differential_rod_support">
+            <visual>
+                <origin xyz="0.0 0.0 ${rod_offset_z}" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/differential_rod_support.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+
+        <!-- DIFFERENTIAL BRACE -->
+        <joint name="differential_to_brace" type="fixed">
+            <parent link="differential_link"/>
+            <child link="differential_brace"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </joint>
+
+        <link name="differential_brace">
+            <visual>
+                <origin xyz="0.0 0.0 ${rod_offset_z}" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/differential_brace.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+
+        <!-- DIFFERENTIAL ROD -->
+        <joint name="differential_to_rod" type="fixed">
+            <parent link="differential_link"/>
+            <child link="differential_rod"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </joint>
+
+        <link name="differential_rod">
+            <visual>
+                <origin xyz="0.0 0.0 ${rod_offset_z}" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/differential_rod.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="steel"/>
+            </visual>
+        </link>
+
+
+
+
 
 
     </xacro:macro>

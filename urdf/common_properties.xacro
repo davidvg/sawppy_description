@@ -9,6 +9,10 @@
     <!-- PARAMETERS -->
 
     <!-- COLORS -->
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
     <material name="glass">
         <color rgba="0.7 0.7 0.7 0.5"/>
     </material>
@@ -21,8 +25,8 @@
         <color rgba="0.95 0.95 0.95 1.0"/>
     </material>
 
-    <material name="black">
-        <color rgba="0.0 0.0 0.0 1.0"/>
+    <material name="steel">
+        <color rgba="0.3 0.3 0.3 1.0"/>
     </material>
 
 </robot>

@@ -9,7 +9,6 @@
     <xacro:include filename="$(find sawppy_description)/urdf/differential.urdf.xacro"/>
 
     <xacro:macro name="body">
-
         
         <!-- ELEMENTS -->
         <link name="base_link">
@@ -91,7 +90,9 @@
         <origin xyz="-${chassis_lenght/2} ${chassis_width/2} ${bottom_plate_height + corner_height/2 + profile_width/2}" rpy="0.0 0.0 -${PI/2}"/>
     </xacro:body_corner>
     
+    <!--                   -->
     <!-- SUSPENSION MOUNTS -->
+    <!--                   -->
 
     <!-- SUSPENSION MOUNT - RIGHT -->
     <xacro:suspension_mount suffix="r" parent="base_link">
@@ -108,8 +109,12 @@
         <origin xyz="-${chassis_lenght/2} 0.0 ${bottom_plate_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:battery_tray>
 
+    <!--              -->
     <!-- DIFFERENTIAL -->
-    <xacro:differential parent="base_link" offset_x="0.0">
+    <!--              -->
+    <!-- xacro:differential parent="base_link" offset_x="0.0" -->
+    <xacro:differential parent="base_link">
+        <origin xyz="${differential_offset_x} 0.0 ${bottom_plate_height + chassis_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:differential>
 
 
