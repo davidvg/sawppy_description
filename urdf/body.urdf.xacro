@@ -95,12 +95,12 @@
     <!--                   -->
 
     <!-- SUSPENSION MOUNT - RIGHT -->
-    <xacro:suspension_mount suffix="r" parent="base_link">
+    <xacro:suspension_mount suffix="right" parent="base_link">
         <origin xyz="${suspension_mount_offset_x} -${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:suspension_mount>
 
     <!-- SUSPENSION MOUNT - LEFT -->
-    <xacro:suspension_mount suffix="l" parent="base_link">
+    <xacro:suspension_mount suffix="left" parent="base_link">
         <origin xyz="${suspension_mount_offset_x} ${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:suspension_mount>
 
@@ -112,7 +112,6 @@
     <!--              -->
     <!-- DIFFERENTIAL -->
     <!--              -->
-    <!-- xacro:differential parent="base_link" offset_x="0.0" -->
     <xacro:differential parent="base_link">
         <origin xyz="${differential_offset_x} 0.0 ${bottom_plate_height + chassis_height + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:differential>

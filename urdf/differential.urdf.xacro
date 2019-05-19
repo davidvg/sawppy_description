@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 
+<!--
+[ ] CHANGE FIXED JOINTS TO THE CORRECT TYPE.
+[ ] MODIFY PARENT LINKS TO MAKE EACH LINK DEPEND ON THE ONE THAT SUPPORTS IT
+
+ -->
+
 <robot xmlns:xacro="http://ros.org/wiki.xacro">
 
     <xacro:property name="rod_offset_z" value="0.0257"/>

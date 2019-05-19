@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- PROPERTIES -->
+    <xacro:property name="rocker_joint_width" value="0.035"/>
+    <xacro:property name="rocker_profile_lenght" value="0.182394"/>
+    <xacro:property name="rocker_profile_y_angle" value="${12.5/180*PI}"/>
+    <xacro:property name="rocker_profile_z_angle" value="${15.802514/180*PI}"/>
+    <xacro:property name="bogie_profile_y_angle" value="${18.9084569/180*PI}"/>
+
+
+    <!-- MACRO -->
+    <xacro:macro name="rocker_bogie_left" params="parent *origin">
+
+        <!-- ROCKER JOINT  -->
+        <!-- CHANGE JOINT TYPE FROM FIXED TO THE CORRECT TYPE -->
+        <joint name="${parent}_to_rocker_bogie_left_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="rocker_joint_left"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="rocker_joint_left">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/rocker_joint_left.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="plastic"/>
+            </visual>
+        </link>
+
+        <!-- JOINT TO FRONT WHEEL PROFILE  -->
+        <joint name="rocker_joint_left_to_profile_182_joint" type="fixed">
+            <parent link="rocker_joint_left"/>
+            <child link="rocker_profile_left"/>
+            <origin xyz="0.0 0.015 0.0" rpy="0.0 ${rocker_profile_y_angle} ${rocker_profile_z_angle}"/>
+        </joint>
+
+        <link name="rocker_profile_left">
+            <visual>
+                <origin xyz="${rocker_profile_lenght/2} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/profile_182.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="aluminium"/>
+            </visual>
+        </link>
+
+        <!-- JOINT TO BOGIE MOUNT PROFILE  -->
+        <joint name="rocker_joint_left_to_bogie_joint" type="fixed">
+            <parent link="rocker_joint_left"/>
+            <child link="bogie_profile_left"/>
+            <origin xyz="0.0 0.015 0.0" rpy="0.0 -${bogie_profile_y_angle} 0.0"/>
+        </joint>
+
+        <link name="bogie_profile_left">
+            <visual>
+                <origin xyz="-${rocker_profile_lenght/2} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/profile_182.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="aluminium"/>
+            </visual>
+        </link>
+
+        <!-- JOINT TO BOGIE PROFILE  -->
+        <!-- 
+        <joint name="rocker_joint_left_to_bogie_joint" type="fixed">
+            <parent link="rocker_joint_left"/>
+            <child link="bogie_joint_left"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </joint>
+
+        <link name="bogie_joint_left">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="package://sawppy_description/meshes/stl/profile_182.stl" scale="${SCALE}"/>
+                </geometry>
+                <material name="aluminium"/>
+            </visual>
+        </link>
+        -->
+
+
+
+
+
+
+
+
+    </xacro:macro>
+
+</robot>
