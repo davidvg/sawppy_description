@@ -95,14 +95,18 @@
     <!--                   -->
 
     <!-- SUSPENSION MOUNT - RIGHT -->
+    <!--
     <xacro:suspension_mount suffix="right" parent="base_link">
         <origin xyz="${suspension_mount_offset_x} -${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:suspension_mount>
+    -->
 
     <!-- SUSPENSION MOUNT - LEFT -->
+    <!--
     <xacro:suspension_mount suffix="left" parent="base_link">
         <origin xyz="${suspension_mount_offset_x} ${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
     </xacro:suspension_mount>
+    -->
 
     <!-- BATTERY TRAY -->
     <xacro:battery_tray parent="base_link">

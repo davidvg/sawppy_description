@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki.xacro">
+    <!-- Distance between horizontal hole and upper and lower profile's central
+    axes. Distance between the central hole and both axes are different -->
+    <xacro:property name="suspension_mount_upper_dist" value="0.035"/>
+    <xacro:property name="suspension_mount_lower_dist" value="0.045"/>
+    <xacro:property name="suspension_mount_offset_x" value="0.073"/>
+    <xacro:property name="suspension_mount_width" value="0.040"/>
 
     <xacro:macro name="suspension_mount" params="suffix parent *origin">
 
         <joint name="${parent}_to_${suffix}_suspension" type="fixed">
             <parent link="${parent}"/>
             <child link="suspension_${suffix}"/>
-            <xacro:insert_block name="origin"/>
+        <origin xyz="${suspension_mount_offset_x} ${-reflect*chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
         </joint>
 
         <link name="suspension_${suffix}">
             <visual>
-                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${PI/2}"/>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${-reflect*PI/2}"/>
                 <geometry>
                     <mesh filename="package://sawppy_description/meshes/stl/suspension_mount.stl" scale="${SCALE}"/>
                 </geometry>

@@ -14,27 +14,32 @@
 
     <xacro:property name="differential_offset_x" value="-0.015"/>
 
-    <!-- Distance between horizontal hole and upper and lower profile's central
-    axes. Distance between the central hole and both axes are different -->
-    <xacro:property name="suspension_mount_upper_dist" value="0.035"/>
-    <xacro:property name="suspension_mount_lower_dist" value="0.045"/>
-    <xacro:property name="suspension_mount_offset_x" value="0.073"/>
-    <xacro:property name="suspension_mount_width" value="0.040"/>
 
     <!-- INCLUDES -->
     <xacro:include filename="$(find sawppy_description)/urdf/common_properties.xacro"/>
     <xacro:include filename="$(find sawppy_description)/urdf/body.urdf.xacro"/>
-    <xacro:include filename="$(find sawppy_description)/urdf/rocker_bogie_left.urdf.xacro"/>
+    <xacro:include filename="$(find sawppy_description)/urdf/rocker_bogie.urdf.xacro"/>
 
     <!-- BODY CHASSIS -->
     <xacro:body/>
 
     <!-- ROCKER-BOGIE - RIGHT -->
+    <xacro:rocker_bogie suffix="right" parent="base_link" reflect="1"/>
+        <!--
+        <origin xyz="0.0 ${suspension_mount_width/2 + 0.001} 0.0" rpy="0.0 0.0 0.0"/>
+        -->
+        <!--
+        <origin xyz="${suspension_mount_offset_x} -${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:rocker_bogie>
+        -->
 
     <!-- ROCKER-BOGIE - LEFT -->
-    <xacro:rocker_bogie_left parent="suspension_left">
-        <origin xyz="0.0 ${suspension_mount_width/2 + 0.001} 0.0" rpy="0.0 0.0 0.0"/>
-    </xacro:rocker_bogie_left>
+    <xacro:rocker_bogie suffix="left" parent="base_link" reflect="-1"/>
+    <!--
+    <xacro:rocker_bogie suffix="left" parent="base_link" reflect="-1">
+        <origin xyz="${suspension_mount_offset_x} ${chassis_width/2} ${bottom_plate_height + suspension_mount_lower_dist + profile_width/2}" rpy="0.0 0.0 0.0"/>
+    </xacro:rocker_bogie>
+    -->
 
 
 </robot>
